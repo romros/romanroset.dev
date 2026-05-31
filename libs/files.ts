@@ -21,8 +21,13 @@ function pathJoinPrefix(prefix: string) {
   return (extraPath: string) => path.join(prefix, extraPath)
 }
 
+function readDirNoHidden(folder: string): string[] {
+  // Ignora fitxers ocults (p.ex. .gitkeep que manté carpetes buides al repo)
+  return fs.readdirSync(folder).filter((name) => !name.startsWith('.'))
+}
+
 export function getAllFilesRecursively(folder: string): string[] {
-  return pipe(fs.readdirSync, map(pipe(pathJoinPrefix(folder), walkDir)), flattenArray)(folder)
+  return pipe(readDirNoHidden, map(pipe(pathJoinPrefix(folder), walkDir)), flattenArray)(folder)
 }
 
 export function formatSlug(slug: string) {
