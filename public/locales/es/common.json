@@ -8,7 +8,6 @@
     "description": "Gestor de Proyectos y Procesos TI, Desarrollador Full Stack, Ingeniero de Software Senior",
     "language": "es"
   },
-
   "intro": {
     "shortIntro1": "Profesional con más de 20 años en tecnología, experto en tecnologías de datos y backend, con experiencia liderando procesos, gestionando proyectos tecnológicos y desarrollando soluciones de software en startups, fundaciones privadas, instituciones educativas y centros de investigación.",
     "shortIntro2": "Actualmente trabajo en la Fundación .cat",
@@ -20,7 +19,6 @@
     "copyEmail": "Copia la dirección de correo",
     "checkCertification": "Verifica 🔗"
   },
-
   "happyReading": "Feliz lectura",
   "menu_blog": "Blog",
   "menu_receptes": "Fragmentos",
@@ -28,14 +26,11 @@
   "menu_sobremi": "Sobre mi",
   "menu_curriculum": "Currículum",
   "menu_articles": "Artículos",
-
   "greetingMessage": "Hola, amigo!",
-
   "introduction": "Soy",
   "name": "Tuan Anh Huynh",
   "description": "un Ingeniero de Software dedicado en",
   "location": "Ha Noi, VN",
-
   "bio1": "Me conocen como Leo en el trabajo.",
   "bio2": "Soy un aprendiz, constructor y buscador de libertad.",
   "bio3": "Vivo en Ha Noi, Viet Nam.",
@@ -52,28 +47,22 @@
   "bio14": "Me encanta la música rock.",
   "bio15": "Me encanta jugar al ajedrez.",
   "bio16": "Me encanta jugar videojuegos, PES es mi favorito.",
-
   "bio_startCoding": "Empecé a aprender a programar en 2016 y desde entonces me enganché.",
   "bio_firstJob": "Conseguí mi primer trabajo como mentor de programación en Python en 2017.",
   "bio_passion": "Tengo una pasión por JS/TS, desarrollo web y comercio electrónico.",
   "bio_blogPurpose": "Empecé este blog para documentar y compartir mi conocimiento y experiencia.",
-
   "menu_blog_2": "Mis escritos",
   "menu_receptes_2": "Mi colección de snippets",
   "menu_projectes_2": "¿Qué he construido?",
   "menu_sobremi_2": "Más sobre mí",
   "menu_curriculum_2": "Mi carrera",
   "analytics": "Tráfico y segmentación de este sitio",
-
   "avatarDescription": "avatar",
-
   "name_position": "Tuan Anh (Leo) Huynh",
   "description_position": "Aprendiz | Constructor",
-
   "lostMessage": "Hmm.. parece que te has perdido",
   "returnMessage": "Pero no te preocupes, puedes encontrar muchas otras cosas en mi página de inicio.",
   "backButton": "Volver a la página de inicio",
-
   "blog": {
     "allPostsTitle": "Todos los Posts",
     "intro": "Escribo principalmente sobre desarrollo web, tecnología y algunas veces sobre mi vida personal. Usa la búsqueda a continuación para filtrar por título.",
@@ -85,23 +74,19 @@
     "mins": "mins",
     "views": "vistos"
   },
-
   "about": {
     "handwritting_sentence": "Si esta visión resuena contigo, estaré encantado de compartir experiencias y aprender juntos."
   },
   "about_description": "Más sobre mi y este blog",
   "resume_description": "Mi carrera profesional, experiencia y habilidades.",
-
   "year": "año",
   "month": "mes",
   "day": "día",
-
   "buildWith": {
     "built_with": "Hecho con",
     "view_source": "Ver código fuente",
     "copyright_author": "Roman Roset - Ingeniero de software"
   },
-
   "projects": {
     "projects_description": "Algunos de mis proyectos profesionales y personales",
     "projects_title": "Proyectos",
@@ -110,19 +95,18 @@
     "learn_more": "Ver más",
     "built_with": "Hecho con"
   },
-
   "articles": {
     "description": "Artículos de investigación que he publicado en revistas científicas.",
     "title": "Artículos"
   },
-
   "pagination": {
     "previous": "Anterior",
     "next": "Siguiente",
     "of": "de"
   },
-
   "tag": {
     "noTagsFound": "No se han encontrado etiquetas."
-  }
+  },
+  "menu_inici": "Inicio",
+  "menu_publicacions": "Publicaciones"
 }

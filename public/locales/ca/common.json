@@ -8,7 +8,6 @@
     "description": "Programador de Backend Sènior, Enginyer de Dades i Enginyer de Programari Sènior",
     "language": "ca"
   },
-
   "happyReading": "Bona lectura",
   "menu_blog": "Bloc",
   "menu_receptes": "Fragments",
@@ -17,7 +16,6 @@
   "menu_curriculum": "Currículum",
   "menu_articles": "Articles",
   "greetingMessage": "Hola, company!",
-
   "intro": {
     "shortIntro1": "Professional amb més de 20 anys en tecnologia, expert en tecnologies de dades i backend, amb experiència liderant processos, gestionant projectes tecnològics i desenvolupant solucions de programari en startups, fundacions privades, institucions educatives i centres de recerca.",
     "shortIntro2": "Actualment treballo a la Fundacio .cat",
@@ -29,12 +27,10 @@
     "copyEmail": "Copia l'adreça de correu",
     "checkCertification": "Verifica 🔗"
   },
-
   "introduction": "Sóc",
   "name": "Tuan Anh Huynh",
   "description": "un Enginyer de Software dedicat a",
   "location": "Ha Noi, VN",
-
   "bio1": "Sóc conegut com a Leo a la feina.",
   "bio2": "Sóc un aprenent, constructor i buscador de llibertat.",
   "bio3": "Visc a Ha Noi, Viet Nam.",
@@ -51,28 +47,22 @@
   "bio14": "M'encanta la música rock.",
   "bio15": "M'encanta jugar a escacs.",
   "bio16": "M'encanta jugar a videojocs, PES és el meu preferit.",
-
   "bio_startCoding": "Vaig començar a aprendre a programar el 2016 i des d'aleshores m'he enganxat.",
   "bio_firstJob": "Vaig aconseguir el meu primer treball com a mentor de programació en Python el 2017.",
   "bio_passion": "Tinc una passió per JS/TS, desenvolupament web i comerç electrònic.",
   "bio_blogPurpose": "Vaig començar aquest blog per documentar i compartir el meu coneixement i experiència.",
-
   "menu_blog_2": "Els meus escrits",
   "menu_receptes_2": "La meva col·lecció de snippets",
   "menu_projectes_2": "Què he construït?",
   "menu_sobremi_2": "Més sobre mi",
   "menu_curriculum_2": "La meva carrera",
   "analytics": "Tràfic i segmentació d'aquest lloc",
-
   "avatarDescription": "avatar",
-
   "name_position": "Tuan Anh (Leo) Huynh",
   "description_position": "Aprenent | Constructor",
-
   "lostMessage": "Hmm.. sembla que t'has perdut",
   "returnMessage": "Però no et preocupis, pots trobar moltes altres coses a la meva pàgina d'inici.",
   "backButton": "Tornar a la pàgina d'inici",
-
   "blog": {
     "allPostsTitle": "Tots els Posts",
     "intro": "Escric principalment sobre desenvolupament web, tecnologia i alguna vegada sobre la meva vida personal. Utilitza la cerca a continuació per filtrar per títol.",
@@ -84,23 +74,19 @@
     "mins": "mins",
     "views": "vistes"
   },
-
   "about_description": "Més sobre mi i aquest bloc",
   "resume_description": "La meva carrera professional, experiència i habilitats.",
   "about": {
     "handwritting_sentence": "Si aquesta visió ressona amb la teva, estaré encantat de compartir experiències i aprendre junts."
   },
-
   "year": "any",
   "month": "mes",
   "day": "dia",
-
   "buildWith": {
     "built_with": "Fet amb",
     "view_source": "Veure el codi font",
     "copyright_author": "Roman Roset - Enginyer de software"
   },
-
   "projects": {
     "projects_description": "Alguns dels meus projectes professionals i personals",
     "projects_title": "Projectes professionals",
@@ -109,19 +95,18 @@
     "learn_more": "Veure més",
     "built_with": "Fet amb"
   },
-
   "articles": {
     "description": "Articles de recerca publicats en revistes científiques.",
     "title": "Articles"
   },
-
   "pagination": {
     "previous": "Anterior",
     "next": "Següent",
     "of": "de"
   },
-
   "tag": {
     "noTagsFound": "No s'han trobat l'etiqueta"
-  }
+  },
+  "menu_inici": "Inici",
+  "menu_publicacions": "Publicacions"
 }
