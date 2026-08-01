@@ -1,5 +1,5 @@
 export let siteMetadata = {
-  siteUrl: 'https://romanroset.vercel.app/ca/',
+  siteUrl: 'https://personalsite-96eq-romros-projects.vercel.app',
   siteRepo: 'https://github.com/romros/romanroset.dev',
   siteLogo: '/static/images/logo.png',
   image: '/static/images/logo.png',
