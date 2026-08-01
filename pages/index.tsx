@@ -4,15 +4,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { PageSeo } from 'components/SEO'
 import { getHomeContent } from '~/data/homeData'
 import type { HomeContent, ProjectItem } from '~/data/homeData'
-import {
-  ArrowIcon,
-  BpFooter,
-  BpNav,
-  DownloadIcon,
-  ExternalIcon,
-  Rich,
-  SealIcon,
-} from '~/components/blueprint/Shared'
+import { ArrowIcon, BpFooter, BpNav, ExternalIcon, Rich } from '~/components/blueprint/Shared'
 
 export async function getStaticProps({ locale }) {
   return {
@@ -58,7 +50,7 @@ function ProjectText({ project }: { project: ProjectItem }) {
       </div>
       <h3>
         {project.title}
-        <span className="arrow">↗</span>
+        {project.url && <span className="arrow">↗</span>}
       </h3>
       <p>{project.desc}</p>
       <div className="stack">
@@ -95,7 +87,11 @@ function ProjectCard({ project }: { project: ProjectItem }) {
   const inner = <ProjectText project={project} />
   return (
     <article className="proj">
-      {project.url ? (
+      {project.url?.startsWith('/') ? (
+        <Link href={project.url} style={{ display: 'contents' }}>
+          {inner}
+        </Link>
+      ) : project.url ? (
         <a
           href={project.url}
           target="_blank"
@@ -153,9 +149,17 @@ export default function Home({ locale }: { locale?: string }) {
                   <ArrowIcon />
                 </a>
                 <Link href="/resume" className="btn btn-ghost">
-                  <DownloadIcon />
+                  <ArrowIcon />
                   {c.hero.ctaCV}
                 </Link>
+              </div>
+              <div className="hero-signals" aria-label="Professional scope">
+                {c.hero.signals.map((signal) => (
+                  <div className="hero-signal" key={signal.label}>
+                    <span className="label mono">{signal.label}</span>
+                    <span className="value">{signal.value}</span>
+                  </div>
+                ))}
               </div>
             </div>
 
@@ -165,7 +169,6 @@ export default function Home({ locale }: { locale?: string }) {
                 <img src="/static/images/roman-portrait.png" alt="Roman Roset" />
               </div>
               <div className="cred-float">
-                <img src="/static/images/cert-nonprofits.png" alt="Anthropic AI Fluency" />
                 <div>
                   <div className="t">{c.hero.credTop}</div>
                   <div className="s">{c.hero.credSub}</div>
@@ -175,23 +178,13 @@ export default function Home({ locale }: { locale?: string }) {
           </div>
         </section>
 
-        {/* PERFIL OBSERVAT */}
-        <section className="agents" id="perfil">
+        {/* VALOR PROFESSIONAL */}
+        <section className="profile" id="perfil">
           <div className="wrap">
             <div className="sec-head">
               <span className="kicker">{c.perfil.kicker}</span>
               <h2>{c.perfil.h2}</h2>
               <p>{c.perfil.intro}</p>
-            </div>
-            <div className="method mono">
-              <b>{c.perfil.methodLabel}</b> · 6 agents
-              <span className="pill">@pm</span>
-              <span className="pill">@oracle</span>
-              <span className="pill">@mem-curator</span>
-              <span className="pill">@code-curator</span>
-              <span className="pill">@ux-expert</span>
-              <span className="pill">@okr-curator</span>
-              <b>{c.perfil.methodProject}</b>
             </div>
             <div className="trait-grid">
               {c.perfil.traits.map((t) => (
@@ -258,53 +251,42 @@ export default function Home({ locale }: { locale?: string }) {
           </div>
         </section>
 
-        {/* CERTS */}
-        <section className="certs" id="certs">
+        {/* CREDENCIALS — suport, no centre del perfil */}
+        <section className="credentials" id="credencials">
           <div className="wrap">
             <div className="sec-head">
-              <span className="kicker">{c.certs.kicker}</span>
-              <h2>{c.certs.h2}</h2>
-              <p>{c.certs.intro}</p>
+              <span className="kicker">{c.credentials.kicker}</span>
+              <h2>{c.credentials.h2}</h2>
+              <p>{c.credentials.intro}</p>
             </div>
-            <div className="cred-grid">
-              {c.certs.items.map((cert) => (
-                <div
-                  className={`cred${cert.img ? ' has-img' : ''}${cert.todo ? ' todo' : ''}`}
-                  key={cert.name}
-                >
-                  <div className="badge">
-                    {cert.img ? (
-                      <img src={cert.img} alt={cert.name} />
-                    ) : (
-                      <>
-                        <span className="prov">
-                          {cert.mark && <span className="mk">{cert.mark}</span>} {cert.provider}
-                        </span>
-                        <span className="nm">{cert.name}</span>
-                        {cert.score && <span className="score">{cert.score}</span>}
-                        <SealIcon />
-                      </>
-                    )}
+            <div className="credential-list">
+              {c.credentials.items.map((credential) => (
+                <article className="credential-row" key={credential.title}>
+                  <div className="credential-mark" aria-hidden="true">
+                    {credential.issuer.charAt(0)}
                   </div>
-                  <div className="cap">
-                    <span className="yr">{cert.year}</span>
-                    {cert.verify ? (
-                      <a
-                        className="verify"
-                        href={cert.verify}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        {c.certs.verify}
-                        <ExternalIcon />
-                      </a>
-                    ) : cert.todo ? null : (
-                      <span className="verify" style={{ opacity: 0.55 }}>
-                        {c.certs.verifiable}
-                      </span>
-                    )}
+                  <div className="credential-main">
+                    <h3>{credential.title}</h3>
+                    <p>{credential.detail}</p>
                   </div>
-                </div>
+                  <div className="credential-meta mono">
+                    <span>{credential.issuer}</span>
+                    <span>{credential.year}</span>
+                  </div>
+                  {credential.verify ? (
+                    <a
+                      className="credential-verify mono"
+                      href={credential.verify}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {c.credentials.verify}
+                      <ExternalIcon />
+                    </a>
+                  ) : (
+                    <span className="credential-verify placeholder" aria-hidden="true" />
+                  )}
+                </article>
               ))}
             </div>
           </div>

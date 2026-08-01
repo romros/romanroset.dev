@@ -1,34 +1,34 @@
 /* ===========================================================================
-   Blueprint skin — redisseny one-pager Roman Roset
-   Tot l'estil està escopat sota .bp perquè no afecti blog / resume / la resta.
-   Adaptat del mockup de disseny (només skin "blueprint").
+   Roman Roset — sistema visual editorial
+   Precisió tècnica sense estètica de laboratori: paper càlid, tinta i verd.
+   Tot l'estil continua escopat sota .bp.
    =========================================================================== */
 
 .bp {
   --font-body: 'IBM Plex Sans', system-ui, sans-serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
-  --font-head: 'IBM Plex Sans', system-ui, sans-serif;
+  --font-head: Georgia, 'Times New Roman', serif;
   --head-weight: 600;
   --head-spacing: -0.02em;
   --maxw: 1180px;
-  --r: 14px;
+  --r: 6px;
 
-  /* palette blueprint */
-  --bg: #081428;
-  --bg2: #0b1d3a;
-  --panel: #0e2342;
-  --panel-2: #102a4f;
-  --ink: #e9f1fc;
-  --ink-soft: #9db4d4;
-  --ink-faint: #5e779f;
-  --line: rgba(125, 170, 220, 0.16);
-  --line-2: rgba(125, 170, 220, 0.3);
-  --accent: #3ad6c4;
-  --accent-ink: #04221f;
-  --accent-2: #f3a93c;
-  --grid-color: rgba(120, 170, 220, 0.1);
-  --grid-size: 46px;
-  --shadow: 0 1px 0 rgba(255, 255, 255, 0.04), 0 18px 40px -22px rgba(0, 0, 0, 0.7);
+  /* paper, ink, engineering green */
+  --bg: #f4f1e9;
+  --bg2: #ebe7dc;
+  --panel: #fffdf8;
+  --panel-2: #e4ece6;
+  --ink: #18231f;
+  --ink-soft: #52615a;
+  --ink-faint: #78857f;
+  --line: rgba(32, 62, 51, 0.12);
+  --line-2: rgba(32, 62, 51, 0.25);
+  --accent: #176b5b;
+  --accent-ink: #ffffff;
+  --accent-2: #a85f32;
+  --grid-color: rgba(32, 62, 51, 0.045);
+  --grid-size: 52px;
+  --shadow: 0 1px 0 rgba(255, 255, 255, 0.8), 0 20px 45px -34px rgba(24, 35, 31, 0.38);
 
   position: relative;
   min-height: 100vh;
@@ -88,7 +88,7 @@
 .bp h4 {
   font-family: var(--font-head);
   font-weight: var(--head-weight);
-  letter-spacing: var(--head-spacing);
+  letter-spacing: -0.035em;
   line-height: 1.08;
 }
 .bp .accent {
@@ -100,7 +100,7 @@
   position: sticky;
   top: 0;
   z-index: 60;
-  background: color-mix(in srgb, var(--bg) 80%, transparent);
+  background: color-mix(in srgb, var(--bg) 91%, transparent);
   backdrop-filter: blur(16px) saturate(1.3);
   border-bottom: 1px solid var(--line);
 }
@@ -310,8 +310,8 @@
   }
 }
 .bp h1.display {
-  font-size: clamp(2.4rem, 5vw, 3.9rem);
-  line-height: 1.08;
+  font-size: clamp(2.75rem, 5.6vw, 4.65rem);
+  line-height: 0.99;
   margin-bottom: 30px;
   text-wrap: balance;
 }
@@ -342,6 +342,35 @@
   flex-wrap: wrap;
   gap: 13px;
   align-items: center;
+}
+.bp .hero-signals {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  max-width: 690px;
+  margin-top: 38px;
+  border-top: 1px solid var(--line-2);
+  border-bottom: 1px solid var(--line);
+}
+.bp .hero-signal {
+  min-width: 0;
+  padding: 15px 16px 16px 0;
+}
+.bp .hero-signal + .hero-signal {
+  border-left: 1px solid var(--line);
+  padding-left: 16px;
+}
+.bp .hero-signal .label {
+  display: block;
+  color: var(--accent);
+  font-size: 0.58rem;
+  margin-bottom: 4px;
+}
+.bp .hero-signal .value {
+  display: block;
+  color: var(--ink-soft);
+  font-size: 0.8rem;
+  line-height: 1.35;
+  text-wrap: balance;
 }
 .bp .btn {
   display: inline-flex;
@@ -387,7 +416,7 @@
 .bp .portrait .frame {
   position: relative;
   aspect-ratio: 1/1;
-  border-radius: 20px;
+  border-radius: 6px;
   border: 1px solid var(--line-2);
   overflow: hidden;
   background: var(--panel);
@@ -420,8 +449,8 @@
   gap: 11px;
   background: var(--panel);
   border: 1px solid var(--line-2);
-  border-radius: 13px;
-  padding: 9px 14px 9px 9px;
+  border-radius: 4px;
+  padding: 13px 16px;
   box-shadow: var(--shadow);
   max-width: 240px;
 }
@@ -447,11 +476,11 @@
   line-height: 1.2;
 }
 
-/* ===== AGENTS / PERFIL ===== */
-.bp .agents {
+/* ===== PERFIL PROFESSIONAL ===== */
+.bp .profile {
   background: var(--bg2);
 }
-.bp .agents .method {
+.bp .profile .method {
   font-family: var(--font-mono);
   font-size: 0.7rem;
   color: var(--ink-faint);
@@ -465,11 +494,11 @@
   flex-wrap: wrap;
   align-items: center;
 }
-.bp .agents .method b {
+.bp .profile .method b {
   color: var(--ink-soft);
   font-weight: 600;
 }
-.bp .agents .method .pill {
+.bp .profile .method .pill {
   color: var(--accent);
   border: 1px solid var(--line-2);
   padding: 2px 8px;
@@ -893,6 +922,60 @@
 .bp .cred .cap .verify .icon {
   width: 11px;
   height: 11px;
+}
+
+/* ===== CREDENCIALS COM A REGISTRE, NO COM A PARET DE BADGES ===== */
+.bp .credentials {
+  background: var(--panel);
+}
+.bp .credential-list {
+  border-top: 1px solid var(--line-2);
+}
+.bp .credential-row {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr) minmax(180px, 0.45fr) 104px;
+  align-items: center;
+  gap: 18px;
+  padding: 20px 4px;
+  border-bottom: 1px solid var(--line);
+}
+.bp .credential-mark {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line-2);
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+.bp .credential-main h3 {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  letter-spacing: -0.01em;
+}
+.bp .credential-main p {
+  color: var(--ink-faint);
+  font-size: 0.84rem;
+  margin-top: 3px;
+}
+.bp .credential-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  color: var(--ink-faint);
+}
+.bp .credential-verify {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 7px;
+  color: var(--accent);
+}
+.bp .credential-verify .icon {
+  width: 12px;
+  height: 12px;
 }
 
 /* ===== EXPERIENCE ===== */
@@ -1322,5 +1405,349 @@
   }
   .bp .brand .who small {
     display: none;
+  }
+  .bp .hero-signals {
+    grid-template-columns: 1fr;
+  }
+  .bp .hero-signal + .hero-signal {
+    border-left: none;
+    border-top: 1px solid var(--line);
+    padding-left: 0;
+  }
+  .bp .credential-row {
+    grid-template-columns: 36px minmax(0, 1fr);
+    gap: 12px;
+  }
+  .bp .credential-meta,
+  .bp .credential-verify {
+    grid-column: 2;
+    justify-content: flex-start;
+  }
+  .bp .credential-verify.placeholder {
+    display: none;
+  }
+}
+
+/* ============================================================
+   /resume — CV / dossier (escopat sota .bp .resume)
+   ============================================================ */
+.bp.resume main {
+  padding-bottom: 20px;
+}
+
+/* hero */
+.bp .rs-hero {
+  padding: 40px 0 56px;
+  border-top: none;
+}
+.bp .rs-hero-grid {
+  display: grid;
+  grid-template-columns: 1.55fr 0.95fr;
+  gap: 54px;
+  align-items: start;
+}
+.bp .rs-back {
+  display: inline-block;
+  color: var(--ink-faint);
+  margin-bottom: 26px;
+  transition: color 0.2s;
+}
+.bp .rs-back:hover {
+  color: var(--accent);
+}
+.bp .rs-lead h1 {
+  font-size: clamp(2.2rem, 4.6vw, 3.4rem);
+  line-height: 1.05;
+  margin: 14px 0 12px;
+}
+.bp .rs-role {
+  font-size: 1.12rem;
+  color: var(--ink-soft);
+  font-weight: 500;
+  margin-bottom: 18px;
+}
+.bp .rs-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  color: var(--ink-faint);
+  margin: -7px 0 18px;
+}
+.bp .rs-facts span + span::before {
+  content: '·';
+  margin-right: 18px;
+  color: var(--line-2);
+}
+.bp .rs-intro {
+  font-size: 1.06rem;
+  color: var(--ink-soft);
+  max-width: 38em;
+  text-wrap: pretty;
+  margin-bottom: 28px;
+}
+.bp .rs-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 13px;
+}
+
+/* targeta contacte/retrat */
+.bp .rs-card {
+  background: var(--panel);
+  border: 1px solid var(--line-2);
+  border-radius: var(--r);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  position: sticky;
+  top: 88px;
+}
+.bp .rs-card-portrait {
+  position: relative;
+  aspect-ratio: 4/3;
+  background: var(--panel-2);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  overflow: hidden;
+  border-bottom: 1px solid var(--line);
+}
+.bp .rs-card-portrait .glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    120% 75% at 50% 4%,
+    color-mix(in srgb, var(--accent) 24%, transparent),
+    transparent 60%
+  );
+}
+.bp .rs-card-portrait img {
+  position: relative;
+  width: 84%;
+  height: auto;
+}
+.bp .rs-card-body {
+  padding: 14px 16px 16px;
+}
+.bp .rs-card-lab {
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  padding: 4px 0 8px;
+}
+.bp .rs-card-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 0;
+  border-top: 1px dashed var(--line);
+  transition:
+    color 0.2s,
+    padding 0.2s;
+}
+.bp .rs-card-row:hover {
+  color: var(--accent);
+  padding-left: 3px;
+}
+.bp .rs-card-row .k {
+  color: var(--ink-faint);
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.bp .rs-card-row .v {
+  font-size: 0.84rem;
+  color: var(--ink);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  text-align: right;
+}
+.bp .rs-card-row:hover .v {
+  color: var(--accent);
+}
+.bp .rs-card-row .v .icon {
+  width: 12px;
+  height: 12px;
+}
+
+/* cos: aside aptituds + main timeline */
+.bp .rs-body {
+  display: grid;
+  grid-template-columns: 0.64fr 1.36fr;
+  gap: 54px;
+  align-items: start;
+  padding-bottom: 72px;
+}
+.bp .rs-side {
+  position: sticky;
+  top: 88px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.bp .rs-block-h {
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  padding-bottom: 14px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid var(--line);
+}
+.bp .rs-defs {
+  display: flex;
+  flex-direction: column;
+}
+.bp .rs-def {
+  padding: 11px 0;
+  border-bottom: 1px dashed var(--line);
+}
+.bp .rs-def:last-child {
+  border-bottom: none;
+}
+.bp .rs-def dt {
+  font-weight: 600;
+  font-size: 0.94rem;
+  color: var(--ink);
+}
+.bp .rs-def-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.2s;
+}
+.bp .rs-def-link:hover {
+  color: var(--accent);
+}
+.bp .rs-def-link .icon {
+  width: 12px;
+  height: 12px;
+}
+.bp .rs-def dd {
+  font-size: 0.86rem;
+  color: var(--ink-soft);
+  margin-top: 3px;
+  text-wrap: pretty;
+}
+
+/* timeline */
+.bp .rs-sec {
+  margin-bottom: 46px;
+}
+.bp .rs-sec:last-child {
+  margin-bottom: 0;
+}
+.bp .rs-sec-h {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  font-size: 1.5rem;
+  margin-bottom: 26px;
+}
+.bp .rs-sec-h .ix {
+  font-size: 0.8rem;
+  color: var(--accent);
+  border: 1px solid var(--line-2);
+  border-radius: 7px;
+  padding: 4px 8px;
+}
+.bp .rs-timeline {
+  position: relative;
+  padding-left: 26px;
+}
+.bp .rs-timeline::before {
+  content: '';
+  position: absolute;
+  left: 3px;
+  top: 8px;
+  bottom: 8px;
+  width: 1px;
+  background: var(--line-2);
+}
+.bp .rs-tl {
+  position: relative;
+  padding: 0 0 30px;
+}
+.bp .rs-tl:last-child {
+  padding-bottom: 0;
+}
+.bp .rs-tl::before {
+  content: '';
+  position: absolute;
+  left: -26px;
+  top: 6px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 1.5px solid var(--ink-faint);
+  transition: all 0.2s;
+}
+.bp .rs-tl:hover::before {
+  border-color: var(--accent);
+}
+.bp .rs-tl.now::before {
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 20%, transparent);
+}
+.bp .rs-tl .yr {
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+  margin-bottom: 5px;
+}
+.bp .rs-tl h4 {
+  font-size: 1.12rem;
+  line-height: 1.2;
+}
+.bp .rs-tl .org {
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+  margin-top: 3px;
+}
+.bp .rs-tl .org .loc {
+  color: var(--ink-faint);
+}
+.bp .rs-tl .desc {
+  color: var(--ink-faint);
+  font-size: 0.9rem;
+  margin-top: 8px;
+  text-wrap: pretty;
+  max-width: 46em;
+}
+
+@media (max-width: 920px) {
+  .bp .rs-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 34px;
+  }
+  .bp .rs-card {
+    position: static;
+    max-width: 420px;
+  }
+  .bp .rs-body {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .bp .rs-side {
+    position: static;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 30px;
+  }
+  .bp .rs-block {
+    flex: 1;
+    min-width: 220px;
+  }
+}
+@media (max-width: 680px) {
+  .bp .rs-hero {
+    padding: 26px 0 40px;
+  }
+  .bp .rs-side {
+    flex-direction: column;
   }
 }

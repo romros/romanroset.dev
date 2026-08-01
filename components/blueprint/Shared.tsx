@@ -71,9 +71,9 @@ export const SealIcon = () => (
 )
 
 const TAGLINE: Record<string, string> = {
-  ca: 'Dades · Sistemes · IA agèntica',
-  es: 'Datos · Sistemas · IA agéntica',
-  en: 'Data · Systems · Agentic AI',
+  ca: 'Dades · Sistemes · Producte',
+  es: 'Datos · Sistemas · Producto',
+  en: 'Data · Systems · Product',
 }
 
 function LangSwitcher() {
@@ -106,7 +106,6 @@ export function BpNav({ content, home = false }: { content: HomeContent; home?: 
           <a href={a('perfil')}>{content.nav.perfil}</a>
           <a href={a('focus')}>{content.nav.focus}</a>
           <a href={a('projectes')}>{content.nav.projectes}</a>
-          <a href={a('certs')}>{content.nav.credencials}</a>
           <a href={a('trajectoria')}>{content.nav.trajectoria}</a>
           <Link href="/resume" className="nav-cta">
             {content.navCta}

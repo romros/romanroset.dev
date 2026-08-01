@@ -42,3 +42,6 @@ yarn-error.log*
 .env
 
 tsconfig.tsbuildinfo
+
+# Agent memory system (privat, no es publica)
+.claude/

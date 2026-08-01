@@ -40,15 +40,12 @@ export interface Pillar {
   p: string
   tags: string[]
 }
-export interface Cert {
-  mark: string
-  provider: string
-  name: string
+export interface Credential {
+  title: string
+  issuer: string
   year: string
+  detail?: string
   verify?: string
-  img?: string
-  todo?: boolean
-  score?: string
 }
 export interface Stat {
   n: string
@@ -77,7 +74,6 @@ export interface HomeContent {
     perfil: string
     focus: string
     projectes: string
-    credencials: string
     trajectoria: string
   }
   navCta: string
@@ -92,26 +88,24 @@ export interface HomeContent {
     ctaCV: string
     credTop: string
     credSub: string
+    signals: { label: string; value: string }[]
   }
   perfil: {
     kicker: string
     h2: string
     intro: string
-    methodLabel: string
-    methodProject: string
     traits: Trait[]
     honestLabel: string
     honest: string
   }
   focus: { kicker: string; h2: string; intro: string; pillars: Pillar[] }
   projectes: { kicker: string; h2: string; intro: string; items: ProjectItem[] }
-  certs: {
+  credentials: {
     kicker: string
     h2: string
     intro: string
-    items: Cert[]
     verify: string
-    verifiable: string
+    items: Credential[]
   }
   trajectoria: {
     kicker: string
@@ -142,79 +136,6 @@ export interface HomeContent {
   }
 }
 
-const SKILLJAR = 'https://verify.skilljar.com/c/'
-
-/* certificats Anthropic — noms en anglès (títols propis dels cursos) */
-const certsBase = (jsName: string): Cert[] => [
-  {
-    mark: 'A',
-    provider: 'Anthropic',
-    name: 'AI Fluency: Framework & Foundations',
-    year: '2026',
-    score: '9/10',
-    verify: SKILLJAR + 'baq7aydnnkx7',
-  },
-  {
-    mark: 'A',
-    provider: 'Anthropic',
-    name: 'Building with the Claude API',
-    year: '2026',
-    verify: SKILLJAR + '2hbfqux7ezhb',
-  },
-  {
-    mark: 'A',
-    provider: 'Anthropic',
-    name: 'Claude 101',
-    year: '2026',
-    verify: SKILLJAR + 'ah2kt6whgmn8',
-  },
-  {
-    mark: 'A',
-    provider: 'Anthropic',
-    name: 'Claude Code 101',
-    year: '2026',
-    verify: SKILLJAR + 'sunw9rjqfq5d',
-  },
-  {
-    mark: 'A',
-    provider: 'Anthropic',
-    name: 'Claude Code in Action',
-    year: '2026',
-    verify: SKILLJAR + 'm2rmmdfyegq5',
-  },
-  {
-    mark: 'A',
-    provider: 'Anthropic',
-    name: 'Introduction to Model Context Protocol',
-    year: '2026',
-    verify: SKILLJAR + '89n6hy639snz',
-  },
-  {
-    mark: 'A',
-    provider: 'Anthropic',
-    name: 'Introduction to Claude Cowork',
-    year: '2026',
-    verify: SKILLJAR + 'ixp4fzvgt8o9',
-  },
-  {
-    mark: 'A',
-    provider: 'Anthropic',
-    name: 'AI Fluency for educators',
-    year: '2026',
-    verify: SKILLJAR + 'ymmmaw87va34',
-  },
-  {
-    mark: '',
-    provider: 'Anthropic',
-    name: 'AI Fluency for nonprofits',
-    year: '2026',
-    verify: SKILLJAR + 'cywdpm62tphz',
-    img: '/static/images/cert-nonprofits.png',
-  },
-  { mark: 'S', provider: 'VMware', name: 'Spring Certified Professional', year: '2023' },
-  { mark: 'JS', provider: 'JavaScript', name: jsName, year: '—', todo: true },
-]
-
 const FOOT_LINKS: FootLink[] = [
   { label: 'Accent Obert', url: 'https://accentobert.cat' },
   { label: 'GitHub', url: 'https://github.com/romros' },
@@ -223,22 +144,20 @@ const FOOT_LINKS: FootLink[] = [
   { label: 'Twitter / X', url: 'https://twitter.com/romanroset' },
 ]
 
-const URL_FIBROLINE = 'https://journals.sagepub.com/doi/abs/10.1177/1359105316650509'
-const URL_PAINOMETER = 'https://www.sciencedirect.com/science/article/abs/pii/S1526590014007214'
-const URL_SITE = 'https://github.com/romros/romanroset.dev'
+const SPRING_CREDENTIAL =
+  'https://www.credly.com/badges/b74a8a79-d07a-4c8c-86f1-4a34cf9d019b/public_url'
 
 /* ===================================== CA ===================================== */
 const ca: HomeContent = {
   meta: {
-    title: 'Roman Roset — Enginyer de sistemes · IA agèntica',
+    title: 'Roman Roset — Enginyer sènior de sistemes, dades i IA aplicada',
     description:
-      'Roman Roset Mayals — Enginyer de dades i sistemes. Construeixo sistemes agèntics sobre dades, processos i evidència. Barcelona.',
+      'Roman Roset Mayals — Enginyer sènior hands-on. Sistemes, dades, producte i IA aplicada amb més de vint anys d’ofici.',
   },
   nav: {
     perfil: 'Perfil',
     focus: 'Focus',
     projectes: 'Projectes',
-    credencials: 'Credencials',
     trajectoria: 'Trajectòria',
   },
   navCta: 'Currículum',
@@ -246,169 +165,189 @@ const ca: HomeContent = {
     tags: ['Barcelona', "20+ anys d'enginyeria"],
     live: 'Enginyer sènior · Accent Obert',
     liveUrl: 'https://accentobert.cat',
-    h1: 'Construeixo sistemes agèntics sobre **dades**, processos i evidència.',
-    lede: "Sóc Roman Roset, enginyer de dades i sistemes amb vint anys d'ofici en backend, BI, salut digital, recerca i processos. Ara m'especialitzo en sistemes agèntics per a organitzacions: harness, agents, memòria, contractes, mètriques i governança.",
+    h1: 'Converteixo problemes complexos en **sistemes útils**.',
+    lede: "Sóc Roman Roset, enginyer sènior hands-on amb més de vint anys d'ofici. Connecto una necessitat real amb l'arquitectura, les dades i un producte que es pot operar: del backend i els processos fins a la IA aplicada.",
     mission:
-      "M'interessa una IA que no substitueixi el criteri humà, sinó que capaciti les persones i els equips perquè treballin millor.",
+      'Aporto criteri tècnic, capacitat d’execució i una obsessió útil: que la tecnologia faci les persones més capaces, no més dependents.',
     ctaProjects: 'Veure projectes',
-    ctaCV: 'Currículum complet',
-    credTop: 'Anthropic Academy',
-    credSub: "9 programes d'IA · 2026",
+    ctaCV: 'Veure currículum',
+    credTop: 'Trajectòria',
+    credSub: '20+ anys · producte, dades i recerca',
+    signals: [
+      { label: 'abast', value: 'del problema a producció' },
+      { label: 'especialitat', value: 'dades · sistemes · IA' },
+      { label: 'manera de fer', value: 'criteri · codi · operació' },
+    ],
   },
   perfil: {
-    kicker: 'Perfil observat',
-    h2: 'El que veuen sis agents',
+    kicker: 'Perfil professional',
+    h2: 'El valor que aporto',
     intro:
-      'Per revisar el meu propi sistema de treball, vaig fer que sis agents independents analitzessin el codi, les decisions i els resultats. El resum: un patró repetit, evidència convergent i punts cecs detectats.',
-    methodLabel: 'Mètode',
-    methodProject: 'laboratori_profes',
+      'Un perfil sènior i hands-on: puc entendre el problema, decidir l’arquitectura, construir el sistema i acompanyar l’equip fins que el resultat funciona de debò.',
     traits: [
       {
         ix: '01',
-        conv: 'convergència 4/6',
-        h3: 'No obro fronts sense evidència tancada',
-        p: "Un objectiu tancat amb evidència abans d'obrir el següent. Mai fronts paral·lels. Quan un pas és massa gran, l'elevo a projecte propi en comptes de partir l'atenció.",
-        evLabel: 'Evidència',
-        ev: "~~43~~ cicles de producte tancats consecutivament al 100% d'OKRs",
+        conv: 'criteri de sistema',
+        h3: 'Veig el conjunt sense perdre el detall',
+        p: 'Modelo domini, dades, serveis, riscos i operació abans de fixar una solució. Després baixo al codi i comprovo si l’arquitectura aguanta el món real.',
+        evLabel: 'Trajectòria',
+        ev: 'backend · dades · recerca · producte · operació',
       },
       {
         ix: '02',
-        conv: 'convergència 4/6',
-        h3: 'Decideixo per evidència, no per intuïció',
-        p: "La primera pregunta no és «com ho faig» sinó «cal?». Retallo funcionalitat i deute per mesura, no per estètica. Mock → smoke → real, amb mètriques com a criteri d'acceptació.",
-        evLabel: 'Evidència',
-        ev: 'model descartat per ~~MAE 0.133 vs 0.241~~, no per opinió',
+        conv: 'execució',
+        h3: 'Porto una necessitat fins a producte',
+        p: 'Tradueixo objectius de persones no tècniques a contractes, fluxos i software desplegable. Puc liderar la decisió i continuar amb les mans al codi.',
+        evLabel: 'Mostra',
+        ev: 'de la recerca clínica a productes i serveis en producció',
       },
       {
         ix: '03',
-        conv: 'signatura tècnica',
-        h3: 'Penso per contractes i invariants',
-        p: 'Defineixo el Protocol i el «no» abans del «com»: el comportament queda acotat i auditable. Privadesa i cost com a invariants de disseny, no com a compliance afegit després.',
-        evLabel: 'Evidència',
-        ev: "fail-hard honest · cost anotat en ~~€~~ i aprovat abans d'executar",
+        conv: 'fiabilitat',
+        h3: 'Decideixo amb evidència',
+        p: 'Contractes, proves, mètriques, costos i privadesa formen part del disseny. Amb IA comparo models i resultats; no confonc una resposta convincent amb un sistema fiable.',
+        evLabel: 'Mètode',
+        ev: 'baselines · E2E · cost real · validació humana',
       },
       {
         ix: '04',
-        conv: 'unanimitat 6/6',
-        h3: 'Lideratge per delegació',
-        p: "Externalitzo la disciplina d'equip a l'entorn —convencions, hooks, protocols— perquè la qualitat no depengui de la memòria de ningú. Coordino sense microgestionar.",
-        evLabel: 'Encaix',
-        ev: 'equip petit (~~2–5~~) · founding/tech lead amb mans al codi',
+        conv: 'lideratge hands-on',
+        h3: 'Faig créixer equips i criteri',
+        p: 'Dono estructura, límits i context perquè les persones puguin decidir millor. Prefereixo processos lleugers que deixin rastre i redueixin dependències personals.',
+        evLabel: 'Experiència',
+        ev: 'tech lead · cofundador · processos · ~~23~~ projectes universitaris',
       },
     ],
-    honestLabel: 'Autoconsciència',
+    honestLabel: 'Regla que m’imposo',
     honest:
-      "«El meu model mental va ràpid i de vegades s'avança a la verificació. Treballo millor amb el resultat real a prop per contrastar-lo abans de comprometre'm.»",
+      '«Tinc facilitat per donar estructura als problemes complexos; també sé que en puc construir més de la necessària. Per això treballo amb fites curtes, evidència real i una regla: la complexitat s’ha de guanyar.»',
   },
   focus: {
-    kicker: 'Ara mateix',
-    h2: "On poso l'energia",
+    kicker: 'Forma de treballar',
+    h2: 'Com afronto els projectes',
     intro:
-      "Tres capes que es reforcen. La nova, que estic construint a fons; les dues que sostenen vint anys d'ofici.",
+      'Combino profunditat tècnica, lectura de producte i eines d’IA sense convertir l’eina de moda en l’arquitectura.',
     pillars: [
       {
-        n: '01 / direcció',
-        h3: 'Sistemes agèntics',
-        p: "Dissenyo l'arquitectura i la governança de sistemes multi-agent: orquestrador, workers, oracle, memòria persistent i processos. Tracto la IA com un harness —rols, contractes, memòria i punts de control humans—, no només prompting: estructura, procés i verificació.",
-        tags: ['Claude Code', 'MCP', 'agents', 'OKR'],
+        n: '01 / entendre',
+        h3: 'Problema abans que solució',
+        p: 'Aclareixo el domini, els usuaris, els invariants i què voldrà dir “funciona”. Retallo abans de construir i separo el que és essencial del que només és interessant.',
+        tags: ['domini', 'producte', 'risc', 'privadesa'],
       },
       {
-        n: '02 / fonament',
-        h3: 'Backend, dades i evidència',
-        p: 'Pipelines LLM deterministes, APIs i enginyeria de dades. Python, FastAPI, Docker, SQL i web semàntica —la base sòlida de tot el que construeixo.',
-        tags: ['Python', 'FastAPI', 'Docker', 'PostgreSQL'],
+        n: '02 / construir',
+        h3: 'Sistemes que es poden operar',
+        p: 'Backend, dades, contractes, proves i desplegament formen una sola decisió. Construeixo perquè el sistema sigui comprensible, observable i modificable després de la primera versió.',
+        tags: ['Python', 'FastAPI', 'TypeScript', 'PostgreSQL', 'Docker'],
       },
       {
-        n: '03 / lideratge',
-        h3: 'Tech lead & processos',
-        p: 'Tradueixo necessitat real en producte enviat. Disseny de processos, OKR i KPIs que fan equips petits més àgils, sense burocràcia ni microgestió.',
-        tags: ['Agile', 'OKR', 'BPMN'],
+        n: '03 / amplificar',
+        h3: 'IA aplicada amb criteri',
+        p: 'Construeixo harnesses lleugers: context ben delimitat, skills reutilitzables, comprovacions i el model adequat segons la feina, la qualitat i el cost. Faig servir agents només quan coordinar contextos o especialitats aporta més valor que complexitat.',
+        tags: ['harness', 'skills', 'selecció de models', 'MCP', 'avaluació'],
       },
     ],
   },
   projectes: {
     kicker: 'Selecció',
-    h2: 'Projectes',
+    h2: 'Àmbits on aporto valor',
     intro:
-      "Coses que estic construint o he liderat. Del framework d'agents que governa els meus projectes a apps clíniques amb recerca publicada.",
+      'La feina actual és privada. N’explico el tipus de problema i la responsabilitat, no els detalls interns. Els projectes personals i la recerca completen la imatge.',
     items: [
       {
         feature: true,
-        kind: 'Sistema propi',
-        status: 'en evolució',
-        title: 'Framework de projectes agèntics',
-        desc: "Un manual i conjunt de components per orquestrar projectes amb agents Claude Code: agents base (orquestrador / worker / oracle), equips (OKR, PM, Dev, Editorial, Anàlisi de dades), serveis de memòria persistent i processos amb convencions BPMN. Destil·lat d'un projecte real —cap peça hi entra sense haver provat el seu valor.",
-        stack: ['Claude Code', 'multi-agent', 'memòria', 'governança', 'BPMN'],
+        kind: 'Feina actual · confidencial',
+        status: 'sistemes interns',
+        title: 'De dades estructurades a decisions útils',
+        desc: 'He evolucionat de construir bases de dades, ETL i BI a dissenyar formes perquè els equips consultin, interpretin i converteixin aquestes dades en decisions amb suport d’IA. La meva responsabilitat recorre la base de dades, la qualitat de la resposta, el cost i l’encaix amb el procés humà.',
+        stack: ['dades estructurades', 'Mage · Metabase', 'IA aplicada', 'APIs', 'avaluació'],
         diagram: {
           side: 'right',
           nodes: [
-            { lab: 'orquestrador', nm: 'Coordina · tradueix intenció', role: 'decideix' },
-            { lab: 'worker · oracle', nm: 'Executa · criteri arquitectònic', role: 'actua' },
-            { lab: 'servei memòria', nm: 'Context entre sessions', role: 'recorda' },
+            { lab: 'fonament', nm: 'Dades · qualitat · context', role: 'sosté' },
+            { lab: 'sistema', nm: 'Consulta · informe · interacció', role: 'assisteix' },
+            { lab: 'persones', nm: 'Criteri · decisió · acció', role: 'decideixen' },
           ],
-          conns: ['convoca', 'persisteix'],
+          conns: ['estructura', 'capacita'],
         },
       },
       {
         feature: true,
-        kind: 'Lab · quant',
-        status: 'validació',
-        title: 'Trading algorítmic agèntic',
-        desc: 'Arquitectura cervell/cos per operar cripto-perpetuals a un DEX: el cervell decideix, el gateway executa. Estratègia validada amb Monte Carlo (3/3) i Walk-Forward (7/9 anys positius), amb gate de producció i modes paper/live. Rigor quantitatiu abans que cap euro real.',
-        stack: ['Python 3.11', 'FastAPI', 'asyncio', 'Docker'],
+        kind: 'Producte personal',
+        status: 'en proves i desenvolupament',
+        title: 'profes.cat',
+        desc: 'Un producte que estic construint en el meu temps lliure per ajudar professorat d’FP. Encara està en proves: el treball no és només fer que la tecnologia funcioni, sinó trobar una manera rigorosa, privada i realment útil d’acompanyar el criteri docent.',
+        stack: ['producte', 'educació', 'privadesa', 'IA aplicada'],
         diagram: {
           side: 'left',
           nodes: [
-            { lab: 'TradingAgent · cervell', nm: 'Decideix QUÈ i QUAN', role: 'estratègia' },
-            { lab: 'BrokerageService · cos', nm: 'Executa · dades · posicions', role: 'gateway' },
-            { lab: 'lab', nm: 'Monte Carlo · Walk-Forward', role: 'evidència' },
+            { lab: 'professor', nm: 'Experiència · criteri · control', role: 'decideix' },
+            { lab: 'producte', nm: 'Flux clar · assistència · privadesa', role: 'ajuda' },
+            { lab: 'prova', nm: 'Ús real · errors · aprenentatge', role: 'millora' },
           ],
-          conns: ['HTTP', 'valida'],
+          conns: ['orienta', 'valida'],
         },
       },
       {
-        kind: 'Fundació .cat',
-        status: 'v1.0 · 2024',
-        title: 'XMCD',
-        desc: 'Xarxa de Monitoratge del Català Digital: sensors Raspberry Pi connectats per VPN WireGuard que fan cerques automatitzades diàries per mesurar la visibilitat del català a Google. Enginyeria de dades amb propòsit cultural.',
-        stack: ['Python', 'crawling', 'WireGuard', 'Zabbix'],
+        kind: 'Feina actual · confidencial',
+        status: 'integració i producte intern',
+        title: 'Processos de negoci sense la fricció de l’eina',
+        desc: 'Dissenyo integracions, automatitzacions i interfícies a mida sobre CRM i ERP. L’objectiu no és afegir una altra capa de software, sinó adaptar HubSpot, Odoo o Zoho al procés real i reduir la corba d’aprenentatge de les persones.',
+        stack: ['HubSpot', 'Odoo', 'Zoho', 'APIs', 'frontends a mida'],
       },
       {
-        kind: 'Open source',
-        status: 'GitHub',
-        title: 'romanroset.dev',
-        url: URL_SITE,
-        desc: 'Aquest lloc, en obert. Next.js, Tailwind i TypeScript amb suport multiidioma (CA/ES/EN). Construir coses que altres puguin reutilitzar i millorar.',
-        stack: ['Next.js', 'Tailwind', 'TypeScript', 'i18n'],
-      },
-      {
-        kind: 'eHealth · recerca',
-        kindLegacy: true,
-        status: 'publicat',
-        title: 'Fibroline',
-        url: URL_FIBROLINE,
-        desc: 'App de tractament cognitiu-conductual autoadministrat per al dolor crònic. En vaig desenvolupar completament la primera versió. Recerca validada amb pacients i publicada.',
-        stack: ['Java', 'Android', 'Firebase'],
-      },
-      {
-        kind: 'eHealth · recerca',
-        kindLegacy: true,
-        status: '79+ citacions',
-        title: 'Painometer',
-        url: URL_PAINOMETER,
-        desc: 'Aplicació mòbil per mesurar, emmagatzemar i compartir la intensitat del dolor. En vaig desenvolupar la versió Android. Àmpliament citada a la literatura científica.',
-        stack: ['Java', 'Android', 'jQuery'],
+        kind: 'eHealth · producte i recerca',
+        status: '11 publicacions',
+        title: 'Fibroline, Painometer i recerca aplicada',
+        url: '/publicacions',
+        desc: 'Aplicacions per a persones amb dolor crònic construïdes amb equips clínics, més onze publicacions revisades per parells. Una etapa que va consolidar la meva manera de treballar: tecnologia, persones i evidència en el mateix sistema.',
+        stack: ['Java', 'Android', 'eHealth', 'recerca aplicada'],
       },
     ],
   },
-  certs: {
+  credentials: {
     kicker: 'Formació contínua',
-    h2: 'Formació recent en IA',
+    h2: 'Credencials seleccionades',
     intro:
-      "Formació recent en IA agèntica (Anthropic Academy) sobre una base d'enginyeria certificada. Cada badge enllaça a la seva verificació.",
-    items: certsBase('Certificat de JavaScript'),
+      'La trajectòria demostra el nivell; aquestes credencials mostren que continuo actualitzant eines i fonaments. He completat nou programes d’Anthropic Academy el 2026; aquí en destaco els més rellevants.',
     verify: 'Verificar',
-    verifiable: 'Verificable',
+    items: [
+      {
+        title: 'Spring Certified Professional',
+        issuer: 'VMware',
+        year: '2023',
+        detail: 'Java · Spring · backend',
+        verify: SPRING_CREDENTIAL,
+      },
+      {
+        title: 'AI Fluency: Framework & Foundations',
+        issuer: 'Anthropic Academy',
+        year: '2026',
+        detail: 'Resultat 9/10',
+        verify: 'https://verify.skilljar.com/c/baq7aydnnkx7',
+      },
+      {
+        title: 'Building with the Claude API',
+        issuer: 'Anthropic Academy',
+        year: '2026',
+        detail: 'Integració de models i producte',
+        verify: 'https://verify.skilljar.com/c/2hbfqux7ezhb',
+      },
+      {
+        title: 'Introduction to Model Context Protocol',
+        issuer: 'Anthropic Academy',
+        year: '2026',
+        detail: 'MCP · eines i context',
+        verify: 'https://verify.skilljar.com/c/89n6hy639snz',
+      },
+      {
+        title: 'AI Fluency for Nonprofits',
+        issuer: 'Anthropic Academy',
+        year: '2026',
+        detail: 'IA aplicada a organitzacions',
+        verify: 'https://verify.skilljar.com/c/cywdpm62tphz',
+      },
+    ],
   },
   trajectoria: {
     kicker: 'Trajectòria',
@@ -417,17 +356,17 @@ const ca: HomeContent = {
       'De la supercomputació i la bioinformàtica a la salut digital i la innovació data-driven. Sempre amb la mateixa brúixola: tecnologia útil per a les persones.',
     stats: [
       { n: '20**+**', l: "anys d'ofici en tecnologia" },
-      { n: '8', l: 'organitzacions: recerca, universitat, spin-off i fundació' },
       { n: '11', l: 'publicacions científiques', href: '/publicacions' },
+      { n: '23', l: 'projectes finals universitaris supervisats' },
       { n: '4', l: 'anys de docència universitària (UOC)' },
-      { n: '6', l: 'anys liderant tecnologia a la Fundació .cat' },
+      { n: '6**+**', l: 'anys construint sistemes de dades i processos interns' },
     ],
     timeline: [
       {
         yr: '2023 — present',
-        h4: 'Accent Obert · Fundació .cat',
-        role: 'Enginyer Sènior · projectes i processos tecnològics',
-        desc: "Construcció i lideratge de projectes perquè qualsevol persona pugui viure plenament en català al món digital: XMCD (monitoratge), la Llista de creadors i iniciatives d'IA en català com Frec.",
+        h4: 'Accent Obert',
+        role: 'Enginyer sènior · sistemes, dades i IA aplicada',
+        desc: 'Disseny i implementació end-to-end de sistemes interns de decisió sobre dades estructurades, integracions CRM/ERP i solucions d’IA amb criteris de qualitat, cost i utilitat real.',
         now: true,
       },
       {
@@ -466,7 +405,7 @@ const ca: HomeContent = {
     kicker: 'Sobre mi',
     lead: 'Em mou una idea simple: la tecnologia ha de fer les persones més **capaces**, no més dependents.',
     p2: "No pretenc revolucionar indústries, sinó aportar el meu granet de sorra perquè la gent aconsegueixi els resultats que desitja —i se senti més competent fent-ho. Crec en l'aprenentatge constant, l'escolta activa i la col·laboració.",
-    p3: "Amb la IA al centre del meu treball, la premissa no canvia: canvia l'eina, no el propòsit.",
+    p3: 'Amb la IA, busco la mínima estructura que doni un resultat fiable: una skill, un model o un harness; agents només quan el problema realment demana coordinació.',
     langsLabel: 'Idiomes',
     langs: [
       { n: 'Català', lv: 'Natiu' },
@@ -479,8 +418,8 @@ const ca: HomeContent = {
     quoteMeta: '— Roman Roset Mayals',
   },
   footer: {
-    h2: 'Parlem de fer la IA útil de debò.',
-    p: 'Disponible per a projectes, col·laboracions i converses sobre enginyeria de sistemes, dades i agents.',
+    h2: 'Parlem de sistemes que hagin de funcionar de debò.',
+    p: 'Projectes, col·laboracions i converses sobre dades, backend, producte i IA aplicada amb criteri.',
     mail: 'romanroset@proton.me',
     linksLabel: 'Enllaços',
     links: FOOT_LINKS,
@@ -492,15 +431,14 @@ const ca: HomeContent = {
 /* ===================================== ES ===================================== */
 const es: HomeContent = {
   meta: {
-    title: 'Roman Roset — Ingeniero de sistemas · IA agéntica',
+    title: 'Roman Roset — Ingeniero sénior de sistemas, datos e IA aplicada',
     description:
-      'Roman Roset Mayals — Ingeniero de datos y sistemas. Construyo sistemas agénticos sobre datos, procesos y evidencia. Barcelona.',
+      'Roman Roset Mayals — Ingeniero sénior hands-on. Sistemas, datos, producto e IA aplicada con más de veinte años de oficio.',
   },
   nav: {
     perfil: 'Perfil',
     focus: 'Foco',
     projectes: 'Proyectos',
-    credencials: 'Credenciales',
     trajectoria: 'Trayectoria',
   },
   navCta: 'Currículum',
@@ -508,173 +446,189 @@ const es: HomeContent = {
     tags: ['Barcelona', '20+ años de ingeniería'],
     live: 'Ingeniero sénior · Accent Obert',
     liveUrl: 'https://accentobert.cat',
-    h1: 'Construyo sistemas agénticos sobre **datos**, procesos y evidencia.',
-    lede: 'Soy Roman Roset, ingeniero de datos y sistemas con veinte años de oficio en backend, BI, salud digital, investigación y procesos. Ahora me especializo en sistemas agénticos para organizaciones: harness, agentes, memoria, contratos, métricas y gobernanza.',
+    h1: 'Convierto problemas complejos en **sistemas útiles**.',
+    lede: 'Soy Roman Roset, ingeniero sénior hands-on con más de veinte años de oficio. Conecto una necesidad real con la arquitectura, los datos y un producto que se puede operar: desde el backend y los procesos hasta la IA aplicada.',
     mission:
-      'Me interesa una IA que no sustituya el criterio humano, sino que capacite a las personas y los equipos para que trabajen mejor.',
+      'Aporto criterio técnico, capacidad de ejecución y una obsesión útil: que la tecnología haga a las personas más capaces, no más dependientes.',
     ctaProjects: 'Ver proyectos',
-    ctaCV: 'Currículum completo',
-    credTop: 'Anthropic Academy',
-    credSub: '9 programas de IA · 2026',
+    ctaCV: 'Ver currículum',
+    credTop: 'Trayectoria',
+    credSub: '20+ años · producto, datos e investigación',
+    signals: [
+      { label: 'alcance', value: 'del problema a producción' },
+      { label: 'especialidad', value: 'datos · sistemas · IA' },
+      { label: 'forma de hacer', value: 'criterio · código · operación' },
+    ],
   },
   perfil: {
-    kicker: 'Perfil observado',
-    h2: 'Lo que ven seis agentes',
+    kicker: 'Perfil profesional',
+    h2: 'El valor que aporto',
     intro:
-      'Para revisar mi propio sistema de trabajo, hice que seis agentes independientes analizaran el código, las decisiones y los resultados. El resumen: un patrón repetido, evidencia convergente y puntos ciegos detectados.',
-    methodLabel: 'Método',
-    methodProject: 'laboratori_profes',
+      'Un perfil sénior y hands-on: puedo entender el problema, decidir la arquitectura, construir el sistema y acompañar al equipo hasta que el resultado funciona de verdad.',
     traits: [
       {
         ix: '01',
-        conv: 'convergencia 4/6',
-        h3: 'No abro frentes sin evidencia cerrada',
-        p: 'Un objetivo cerrado con evidencia antes de abrir el siguiente. Nunca frentes paralelos. Cuando un paso es demasiado grande, lo elevo a proyecto propio en vez de partir la atención.',
-        evLabel: 'Evidencia',
-        ev: '~~43~~ ciclos de producto cerrados consecutivamente al 100% de OKRs',
+        conv: 'criterio de sistema',
+        h3: 'Veo el conjunto sin perder el detalle',
+        p: 'Modelo dominio, datos, servicios, riesgos y operación antes de fijar una solución. Después bajo al código y compruebo si la arquitectura aguanta el mundo real.',
+        evLabel: 'Trayectoria',
+        ev: 'backend · datos · investigación · producto · operación',
       },
       {
         ix: '02',
-        conv: 'convergencia 4/6',
-        h3: 'Decido por evidencia, no por intuición',
-        p: 'La primera pregunta no es «cómo lo hago» sino «¿hace falta?». Recorto funcionalidad y deuda por medida, no por estética. Mock → smoke → real, con métricas como criterio de aceptación.',
-        evLabel: 'Evidencia',
-        ev: 'modelo descartado por ~~MAE 0.133 vs 0.241~~, no por opinión',
+        conv: 'ejecución',
+        h3: 'Llevo una necesidad hasta producto',
+        p: 'Traduzco objetivos de personas no técnicas a contratos, flujos y software desplegable. Puedo liderar la decisión y seguir con las manos en el código.',
+        evLabel: 'Muestra',
+        ev: 'de la investigación clínica a productos y servicios en producción',
       },
       {
         ix: '03',
-        conv: 'firma técnica',
-        h3: 'Pienso por contratos e invariantes',
-        p: 'Defino el Protocolo y el «no» antes del «cómo»: el comportamiento queda acotado y auditable. Privacidad y coste como invariantes de diseño, no como compliance añadido después.',
-        evLabel: 'Evidencia',
-        ev: 'fail-hard honesto · coste anotado en ~~€~~ y aprobado antes de ejecutar',
+        conv: 'fiabilidad',
+        h3: 'Decido con evidencia',
+        p: 'Contratos, pruebas, métricas, costes y privacidad forman parte del diseño. Con IA comparo modelos y resultados; no confundo una respuesta convincente con un sistema fiable.',
+        evLabel: 'Método',
+        ev: 'baselines · E2E · coste real · validación humana',
       },
       {
         ix: '04',
-        conv: 'unanimidad 6/6',
-        h3: 'Liderazgo por delegación',
-        p: 'Externalizo la disciplina de equipo al entorno —convenciones, hooks, protocolos— para que la calidad no dependa de la memoria de nadie. Coordino sin microgestionar.',
-        evLabel: 'Encaje',
-        ev: 'equipo pequeño (~~2–5~~) · founding/tech lead con las manos en el código',
+        conv: 'liderazgo hands-on',
+        h3: 'Hago crecer equipos y criterio',
+        p: 'Doy estructura, límites y contexto para que las personas puedan decidir mejor. Prefiero procesos ligeros que dejen rastro y reduzcan dependencias personales.',
+        evLabel: 'Experiencia',
+        ev: 'tech lead · cofundador · procesos · ~~23~~ proyectos universitarios',
       },
     ],
-    honestLabel: 'Autoconciencia',
+    honestLabel: 'Regla que me impongo',
     honest:
-      '«Mi modelo mental va rápido y a veces se adelanta a la verificación. Trabajo mejor con el resultado real cerca para contrastarlo antes de comprometerme.»',
+      '«Tengo facilidad para dar estructura a los problemas complejos; también sé que puedo construir más de la necesaria. Por eso trabajo con hitos cortos, evidencia real y una regla: la complejidad debe ganarse.»',
   },
   focus: {
-    kicker: 'Ahora mismo',
-    h2: 'Dónde pongo la energía',
+    kicker: 'Forma de trabajar',
+    h2: 'Cómo afronto los proyectos',
     intro:
-      'Tres capas que se refuerzan. La nueva, que estoy construyendo a fondo; las dos que sostienen veinte años de oficio.',
+      'Combino profundidad técnica, lectura de producto y herramientas de IA sin convertir la herramienta de moda en la arquitectura.',
     pillars: [
       {
-        n: '01 / dirección',
-        h3: 'Sistemas agénticos',
-        p: 'Diseño la arquitectura y la gobernanza de sistemas multi-agente: orquestador, workers, oracle, memoria persistente y procesos. Trato la IA como un harness —roles, contratos, memoria y puntos de control humanos—, no solo prompting: estructura, proceso y verificación.',
-        tags: ['Claude Code', 'MCP', 'agentes', 'OKR'],
+        n: '01 / entender',
+        h3: 'Problema antes que solución',
+        p: 'Aclaro el dominio, los usuarios, los invariantes y qué significará “funciona”. Recorto antes de construir y separo lo esencial de lo que solo es interesante.',
+        tags: ['dominio', 'producto', 'riesgo', 'privacidad'],
       },
       {
-        n: '02 / fundamento',
-        h3: 'Backend, datos y evidencia',
-        p: 'Pipelines LLM deterministas, APIs e ingeniería de datos. Python, FastAPI, Docker, SQL y web semántica —la base sólida de todo lo que construyo.',
-        tags: ['Python', 'FastAPI', 'Docker', 'PostgreSQL'],
+        n: '02 / construir',
+        h3: 'Sistemas que se pueden operar',
+        p: 'Backend, datos, contratos, pruebas y despliegue forman una sola decisión. Construyo para que el sistema sea comprensible, observable y modificable después de la primera versión.',
+        tags: ['Python', 'FastAPI', 'TypeScript', 'PostgreSQL', 'Docker'],
       },
       {
-        n: '03 / liderazgo',
-        h3: 'Tech lead & procesos',
-        p: 'Traduzco necesidad real en producto entregado. Diseño de procesos, OKR y KPIs que hacen equipos pequeños más ágiles, sin burocracia ni microgestión.',
-        tags: ['Agile', 'OKR', 'BPMN'],
+        n: '03 / amplificar',
+        h3: 'IA aplicada con criterio',
+        p: 'Construyo harnesses ligeros: contexto bien delimitado, skills reutilizables, comprobaciones y el modelo adecuado según la tarea, la calidad y el coste. Uso agentes solo cuando coordinar contextos o especialidades aporta más valor que complejidad.',
+        tags: ['harness', 'skills', 'selección de modelos', 'MCP', 'evaluación'],
       },
     ],
   },
   projectes: {
     kicker: 'Selección',
-    h2: 'Proyectos',
+    h2: 'Ámbitos donde aporto valor',
     intro:
-      'Cosas que estoy construyendo o he liderado. Del framework de agentes que gobierna mis proyectos a apps clínicas con investigación publicada.',
+      'El trabajo actual es privado. Explico el tipo de problema y la responsabilidad, no los detalles internos. Los proyectos personales y la investigación completan la imagen.',
     items: [
       {
         feature: true,
-        kind: 'Sistema propio',
-        status: 'en evolución',
-        title: 'Framework de proyectos agénticos',
-        desc: 'Un manual y conjunto de componentes para orquestar proyectos con agentes Claude Code: agentes base (orquestador / worker / oracle), equipos (OKR, PM, Dev, Editorial, Análisis de datos), servicios de memoria persistente y procesos con convenciones BPMN. Destilado de un proyecto real —ninguna pieza entra sin haber probado su valor.',
-        stack: ['Claude Code', 'multi-agente', 'memoria', 'gobernanza', 'BPMN'],
+        kind: 'Trabajo actual · confidencial',
+        status: 'sistemas internos',
+        title: 'De datos estructurados a decisiones útiles',
+        desc: 'He evolucionado de construir bases de datos, ETL y BI a diseñar formas para que los equipos consulten, interpreten y conviertan esos datos en decisiones con apoyo de IA. Mi responsabilidad recorre la base de datos, la calidad de la respuesta, el coste y el encaje con el proceso humano.',
+        stack: ['datos estructurados', 'Mage · Metabase', 'IA aplicada', 'APIs', 'evaluación'],
         diagram: {
           side: 'right',
           nodes: [
-            { lab: 'orquestador', nm: 'Coordina · traduce intención', role: 'decide' },
-            { lab: 'worker · oracle', nm: 'Ejecuta · criterio arquitectónico', role: 'actúa' },
-            { lab: 'servicio memoria', nm: 'Contexto entre sesiones', role: 'recuerda' },
+            { lab: 'fundamento', nm: 'Datos · calidad · contexto', role: 'sostiene' },
+            { lab: 'sistema', nm: 'Consulta · informe · interacción', role: 'asiste' },
+            { lab: 'personas', nm: 'Criterio · decisión · acción', role: 'deciden' },
           ],
-          conns: ['convoca', 'persiste'],
+          conns: ['estructura', 'capacita'],
         },
       },
       {
         feature: true,
-        kind: 'Lab · quant',
-        status: 'validación',
-        title: 'Trading algorítmico agéntico',
-        desc: 'Arquitectura cerebro/cuerpo para operar cripto-perpetuales en un DEX: el cerebro decide, el gateway ejecuta. Estrategia validada con Monte Carlo (3/3) y Walk-Forward (7/9 años positivos), con gate de producción y modos paper/live. Rigor cuantitativo antes que ningún euro real.',
-        stack: ['Python 3.11', 'FastAPI', 'asyncio', 'Docker'],
+        kind: 'Producto personal',
+        status: 'en pruebas y desarrollo',
+        title: 'profes.cat',
+        desc: 'Un producto que estoy construyendo en mi tiempo libre para ayudar al profesorado de FP. Todavía está en pruebas: el trabajo no consiste solo en hacer que la tecnología funcione, sino en encontrar una forma rigurosa, privada y realmente útil de acompañar el criterio docente.',
+        stack: ['producto', 'educación', 'privacidad', 'IA aplicada'],
         diagram: {
           side: 'left',
           nodes: [
-            { lab: 'TradingAgent · cerebro', nm: 'Decide QUÉ y CUÁNDO', role: 'estrategia' },
-            {
-              lab: 'BrokerageService · cuerpo',
-              nm: 'Ejecuta · datos · posiciones',
-              role: 'gateway',
-            },
-            { lab: 'lab', nm: 'Monte Carlo · Walk-Forward', role: 'evidencia' },
+            { lab: 'profesor', nm: 'Experiencia · criterio · control', role: 'decide' },
+            { lab: 'producto', nm: 'Flujo claro · asistencia · privacidad', role: 'ayuda' },
+            { lab: 'prueba', nm: 'Uso real · errores · aprendizaje', role: 'mejora' },
           ],
-          conns: ['HTTP', 'valida'],
+          conns: ['orienta', 'valida'],
         },
       },
       {
-        kind: 'Fundació .cat',
-        status: 'v1.0 · 2024',
-        title: 'XMCD',
-        desc: 'Red de Monitoreo del Catalán Digital: sensores Raspberry Pi conectados por VPN WireGuard que hacen búsquedas automatizadas diarias para medir la visibilidad del catalán en Google. Ingeniería de datos con propósito cultural.',
-        stack: ['Python', 'crawling', 'WireGuard', 'Zabbix'],
+        kind: 'Trabajo actual · confidencial',
+        status: 'integración y producto interno',
+        title: 'Procesos de negocio sin la fricción de la herramienta',
+        desc: 'Diseño integraciones, automatizaciones e interfaces a medida sobre CRM y ERP. El objetivo no es añadir otra capa de software, sino adaptar HubSpot, Odoo o Zoho al proceso real y reducir la curva de aprendizaje de las personas.',
+        stack: ['HubSpot', 'Odoo', 'Zoho', 'APIs', 'frontends a medida'],
       },
       {
-        kind: 'Open source',
-        status: 'GitHub',
-        title: 'romanroset.dev',
-        url: URL_SITE,
-        desc: 'Este sitio, en abierto. Next.js, Tailwind y TypeScript con soporte multiidioma (CA/ES/EN). Construir cosas que otros puedan reutilizar y mejorar.',
-        stack: ['Next.js', 'Tailwind', 'TypeScript', 'i18n'],
-      },
-      {
-        kind: 'eHealth · investigación',
-        kindLegacy: true,
-        status: 'publicado',
-        title: 'Fibroline',
-        url: URL_FIBROLINE,
-        desc: 'App de tratamiento cognitivo-conductual autoadministrado para el dolor crónico. Desarrollé completamente la primera versión. Investigación validada con pacientes y publicada.',
-        stack: ['Java', 'Android', 'Firebase'],
-      },
-      {
-        kind: 'eHealth · investigación',
-        kindLegacy: true,
-        status: '79+ citas',
-        title: 'Painometer',
-        url: URL_PAINOMETER,
-        desc: 'Aplicación móvil para medir, almacenar y compartir la intensidad del dolor. Desarrollé la versión Android. Ampliamente citada en la literatura científica.',
-        stack: ['Java', 'Android', 'jQuery'],
+        kind: 'eHealth · producto e investigación',
+        status: '11 publicaciones',
+        title: 'Fibroline, Painometer e investigación aplicada',
+        url: '/publicacions',
+        desc: 'Aplicaciones para personas con dolor crónico construidas con equipos clínicos, junto a once publicaciones revisadas por pares. Una etapa que consolidó mi manera de trabajar: tecnología, personas y evidencia en el mismo sistema.',
+        stack: ['Java', 'Android', 'eHealth', 'investigación aplicada'],
       },
     ],
   },
-  certs: {
+  credentials: {
     kicker: 'Formación continua',
-    h2: 'Formación reciente en IA',
+    h2: 'Credenciales seleccionadas',
     intro:
-      'Formación reciente en IA agéntica (Anthropic Academy) sobre una base de ingeniería certificada. Cada badge enlaza a su verificación.',
-    items: certsBase('Certificado de JavaScript'),
+      'La trayectoria demuestra el nivel; estas credenciales muestran que sigo actualizando herramientas y fundamentos. He completado nueve programas de Anthropic Academy en 2026; aquí destaco los más relevantes.',
     verify: 'Verificar',
-    verifiable: 'Verificable',
+    items: [
+      {
+        title: 'Spring Certified Professional',
+        issuer: 'VMware',
+        year: '2023',
+        detail: 'Java · Spring · backend',
+        verify: SPRING_CREDENTIAL,
+      },
+      {
+        title: 'AI Fluency: Framework & Foundations',
+        issuer: 'Anthropic Academy',
+        year: '2026',
+        detail: 'Resultado 9/10',
+        verify: 'https://verify.skilljar.com/c/baq7aydnnkx7',
+      },
+      {
+        title: 'Building with the Claude API',
+        issuer: 'Anthropic Academy',
+        year: '2026',
+        detail: 'Integración de modelos y producto',
+        verify: 'https://verify.skilljar.com/c/2hbfqux7ezhb',
+      },
+      {
+        title: 'Introduction to Model Context Protocol',
+        issuer: 'Anthropic Academy',
+        year: '2026',
+        detail: 'MCP · herramientas y contexto',
+        verify: 'https://verify.skilljar.com/c/89n6hy639snz',
+      },
+      {
+        title: 'AI Fluency for Nonprofits',
+        issuer: 'Anthropic Academy',
+        year: '2026',
+        detail: 'IA aplicada a organizaciones',
+        verify: 'https://verify.skilljar.com/c/cywdpm62tphz',
+      },
+    ],
   },
   trajectoria: {
     kicker: 'Trayectoria',
@@ -683,17 +637,17 @@ const es: HomeContent = {
       'De la supercomputación y la bioinformática a la salud digital y la innovación data-driven. Siempre con la misma brújula: tecnología útil para las personas.',
     stats: [
       { n: '20**+**', l: 'años de oficio en tecnología' },
-      { n: '8', l: 'organizaciones: investigación, universidad, spin-off y fundación' },
       { n: '11', l: 'publicaciones científicas', href: '/publicacions' },
+      { n: '23', l: 'proyectos finales universitarios supervisados' },
       { n: '4', l: 'años de docencia universitaria (UOC)' },
-      { n: '6', l: 'años liderando tecnología en la Fundació .cat' },
+      { n: '6**+**', l: 'años construyendo sistemas de datos y procesos internos' },
     ],
     timeline: [
       {
         yr: '2023 — presente',
-        h4: 'Accent Obert · Fundació .cat',
-        role: 'Ingeniero Sénior · proyectos y procesos tecnológicos',
-        desc: 'Construcción y liderazgo de proyectos para que cualquier persona pueda vivir plenamente en catalán en el mundo digital: XMCD (monitoreo), la Lista de creadores e iniciativas de IA en catalán como Frec.',
+        h4: 'Accent Obert',
+        role: 'Ingeniero sénior · sistemas, datos e IA aplicada',
+        desc: 'Diseño e implementación end-to-end de sistemas internos de decisión sobre datos estructurados, integraciones CRM/ERP y soluciones de IA con criterios de calidad, coste y utilidad real.',
         now: true,
       },
       {
@@ -732,7 +686,7 @@ const es: HomeContent = {
     kicker: 'Sobre mí',
     lead: 'Me mueve una idea simple: la tecnología debe hacer a las personas más **capaces**, no más dependientes.',
     p2: 'No pretendo revolucionar industrias, sino aportar mi granito de arena para que la gente consiga los resultados que desea —y se sienta más competente haciéndolo. Creo en el aprendizaje constante, la escucha activa y la colaboración.',
-    p3: 'Con la IA en el centro de mi trabajo, la premisa no cambia: cambia la herramienta, no el propósito.',
+    p3: 'Con la IA, busco la mínima estructura que produzca un resultado fiable: una skill, un modelo o un harness; agentes solo cuando el problema realmente exige coordinación.',
     langsLabel: 'Idiomas',
     langs: [
       { n: 'Català', lv: 'Nativo' },
@@ -745,8 +699,8 @@ const es: HomeContent = {
     quoteMeta: '— Roman Roset Mayals',
   },
   footer: {
-    h2: 'Hablemos de hacer la IA útil de verdad.',
-    p: 'Disponible para proyectos, colaboraciones y conversaciones sobre ingeniería de sistemas, datos y agentes.',
+    h2: 'Hablemos de sistemas que deban funcionar de verdad.',
+    p: 'Proyectos, colaboraciones y conversaciones sobre datos, backend, producto e IA aplicada con criterio.',
     mail: 'romanroset@proton.me',
     linksLabel: 'Enlaces',
     links: FOOT_LINKS,
@@ -758,15 +712,14 @@ const es: HomeContent = {
 /* ===================================== EN ===================================== */
 const en: HomeContent = {
   meta: {
-    title: 'Roman Roset — Systems engineer · Agentic AI',
+    title: 'Roman Roset — Senior systems, data & applied AI engineer',
     description:
-      'Roman Roset Mayals — Data & systems engineer. I build agentic systems on data, process and evidence. Barcelona.',
+      'Roman Roset Mayals — Senior hands-on engineer. Systems, data, product and applied AI backed by more than twenty years of craft.',
   },
   nav: {
     perfil: 'Profile',
     focus: 'Focus',
     projectes: 'Projects',
-    credencials: 'Credentials',
     trajectoria: 'Career',
   },
   navCta: 'Résumé',
@@ -774,169 +727,189 @@ const en: HomeContent = {
     tags: ['Barcelona', '20+ years of engineering'],
     live: 'Senior engineer · Accent Obert',
     liveUrl: 'https://accentobert.cat',
-    h1: 'I build agentic systems on **data**, process and evidence.',
-    lede: "I'm Roman Roset, a data & systems engineer with twenty years across backend, BI, digital health, research and process. Now I focus on agentic systems for organisations: harness, agents, memory, contracts, metrics and governance.",
+    h1: 'I turn complex problems into **useful systems**.',
+    lede: "I'm Roman Roset, a senior hands-on engineer with more than twenty years of craft. I connect a real need with the architecture, data and an operable product: from backend and process through to applied AI.",
     mission:
-      'I care about an AI that does not replace human judgement, but enables people and teams to work better.',
+      'I bring technical judgement, delivery capability and one useful obsession: technology should make people more capable, not more dependent.',
     ctaProjects: 'See projects',
-    ctaCV: 'Full résumé',
-    credTop: 'Anthropic Academy',
-    credSub: '9 AI programs · 2026',
+    ctaCV: 'View résumé',
+    credTop: 'Track record',
+    credSub: '20+ years · product, data & research',
+    signals: [
+      { label: 'scope', value: 'from problem to production' },
+      { label: 'specialism', value: 'data · systems · AI' },
+      { label: 'practice', value: 'judgement · code · operations' },
+    ],
   },
   perfil: {
-    kicker: 'Observed profile',
-    h2: 'What six agents see',
+    kicker: 'Professional profile',
+    h2: 'The value I bring',
     intro:
-      'To review my own way of working, I had six independent agents analyse the code, the decisions and the results. The summary: a repeated pattern, convergent evidence and detected blind spots.',
-    methodLabel: 'Method',
-    methodProject: 'laboratori_profes',
+      'A senior, hands-on profile: I can understand the problem, choose the architecture, build the system and support the team until the outcome actually works.',
     traits: [
       {
         ix: '01',
-        conv: 'convergence 4/6',
-        h3: 'I never open fronts without closed evidence',
-        p: 'One goal closed with evidence before opening the next. Never parallel fronts. When a step is too big, I promote it to its own project instead of splitting attention.',
-        evLabel: 'Evidence',
-        ev: '~~43~~ product cycles closed consecutively at 100% of OKRs',
+        conv: 'systems judgement',
+        h3: 'I see the whole without losing the detail',
+        p: 'I model the domain, data, services, risks and operation before fixing a solution. Then I go down to the code and test whether the architecture survives the real world.',
+        evLabel: 'Track record',
+        ev: 'backend · data · research · product · operations',
       },
       {
         ix: '02',
-        conv: 'convergence 4/6',
-        h3: 'I decide by evidence, not intuition',
-        p: 'The first question is not "how do I do it" but "is it needed?". I cut features and debt by measurement, not by aesthetics. Mock → smoke → real, with metrics as acceptance criteria.',
-        evLabel: 'Evidence',
-        ev: 'model dropped because of ~~MAE 0.133 vs 0.241~~, not opinion',
+        conv: 'delivery',
+        h3: 'I take a need all the way to product',
+        p: 'I translate non-technical goals into contracts, flows and deployable software. I can lead the decision and remain hands-on with the code.',
+        evLabel: 'Examples',
+        ev: 'from clinical research to products and live services',
       },
       {
         ix: '03',
-        conv: 'technical signature',
-        h3: 'I think in contracts and invariants',
-        p: 'I define the Protocol and the "no" before the "how": behaviour stays bounded and auditable. Privacy and cost as design invariants, not compliance bolted on later.',
-        evLabel: 'Evidence',
-        ev: 'honest fail-hard · cost annotated in ~~€~~ and approved before running',
+        conv: 'reliability',
+        h3: 'I decide with evidence',
+        p: 'Contracts, tests, metrics, cost and privacy are part of the design. With AI I compare models and results; I do not confuse a convincing answer with a reliable system.',
+        evLabel: 'Method',
+        ev: 'baselines · E2E · real cost · human validation',
       },
       {
         ix: '04',
-        conv: 'unanimity 6/6',
-        h3: 'Leadership by delegation',
-        p: "I externalise team discipline to the environment —conventions, hooks, protocols— so quality does not depend on anyone's memory. I coordinate without micromanaging.",
-        evLabel: 'Fit',
-        ev: 'small team (~~2–5~~) · founding/tech lead with hands on the code',
+        conv: 'hands-on leadership',
+        h3: 'I grow teams and judgement',
+        p: 'I provide structure, boundaries and context so people can make better decisions. I prefer lightweight processes that leave a trace and reduce personal dependencies.',
+        evLabel: 'Experience',
+        ev: 'tech lead · co-founder · process · ~~23~~ university projects',
       },
     ],
-    honestLabel: 'Self-awareness',
+    honestLabel: 'A rule I set myself',
     honest:
-      '"My mental model runs fast and sometimes gets ahead of verification. I work best with the real result nearby to check it before committing."',
+      '“I am good at giving structure to complex problems; I also know I can build more than they need. That is why I work with short milestones, real evidence and one rule: complexity has to earn its place.”',
   },
   focus: {
-    kicker: 'Right now',
-    h2: 'Where I put my energy',
+    kicker: 'Way of working',
+    h2: 'How I approach projects',
     intro:
-      'Three reinforcing layers. The new one, which I am building in depth; the two that hold up twenty years of craft.',
+      'I combine technical depth, product judgement and AI tools without turning the fashionable tool into the architecture.',
     pillars: [
       {
-        n: '01 / direction',
-        h3: 'Agentic systems',
-        p: 'I design the architecture and governance of multi-agent systems: orchestrator, workers, oracle, persistent memory and process. I treat AI as a harness —roles, contracts, memory and human checkpoints—, not just prompting: structure, process and verification.',
-        tags: ['Claude Code', 'MCP', 'agents', 'OKR'],
+        n: '01 / understand',
+        h3: 'Problem before solution',
+        p: 'I clarify the domain, users, invariants and what “works” will mean. I cut before building and separate what is essential from what is merely interesting.',
+        tags: ['domain', 'product', 'risk', 'privacy'],
       },
       {
-        n: '02 / foundation',
-        h3: 'Backend, data & evidence',
-        p: 'Deterministic LLM pipelines, APIs and data engineering. Python, FastAPI, Docker, SQL and the semantic web —the solid base of everything I build.',
-        tags: ['Python', 'FastAPI', 'Docker', 'PostgreSQL'],
+        n: '02 / build',
+        h3: 'Systems that can be operated',
+        p: 'Backend, data, contracts, tests and deployment are one decision. I build systems to remain understandable, observable and changeable after the first release.',
+        tags: ['Python', 'FastAPI', 'TypeScript', 'PostgreSQL', 'Docker'],
       },
       {
-        n: '03 / leadership',
-        h3: 'Tech lead & process',
-        p: 'I translate real need into shipped product. Process design, OKRs and KPIs that make small teams more agile, without bureaucracy or micromanagement.',
-        tags: ['Agile', 'OKR', 'BPMN'],
+        n: '03 / amplify',
+        h3: 'Applied AI with judgement',
+        p: 'I build lightweight harnesses: bounded context, reusable skills, checks and the right model for the task, quality and cost. I use agents only when coordinating contexts or specialisms creates more value than complexity.',
+        tags: ['harness', 'skills', 'model selection', 'MCP', 'evaluation'],
       },
     ],
   },
   projectes: {
     kicker: 'Selection',
-    h2: 'Projects',
+    h2: 'Where I create value',
     intro:
-      'Things I am building or have led. From the agent framework that governs my projects to clinical apps with published research.',
+      'My current work is private. I describe the kind of problem and responsibility, not internal details. Personal projects and research complete the picture.',
     items: [
       {
         feature: true,
-        kind: 'Own system',
-        status: 'evolving',
-        title: 'Agentic project framework',
-        desc: 'A manual and set of components to orchestrate projects with Claude Code agents: base agents (orchestrator / worker / oracle), teams (OKR, PM, Dev, Editorial, Data analysis), persistent memory services and processes with BPMN conventions. Distilled from a real project —no piece enters without having proven its value.',
-        stack: ['Claude Code', 'multi-agent', 'memory', 'governance', 'BPMN'],
+        kind: 'Current work · confidential',
+        status: 'internal systems',
+        title: 'From structured data to useful decisions',
+        desc: 'I have moved from building databases, ETL and BI to designing ways for teams to query, interpret and turn that data into decisions with AI support. My responsibility spans the data foundation, answer quality, cost and fit with the human process.',
+        stack: ['structured data', 'Mage · Metabase', 'applied AI', 'APIs', 'evaluation'],
         diagram: {
           side: 'right',
           nodes: [
-            { lab: 'orchestrator', nm: 'Coordinates · translates intent', role: 'decides' },
-            { lab: 'worker · oracle', nm: 'Executes · architectural judgement', role: 'acts' },
-            { lab: 'memory service', nm: 'Context across sessions', role: 'remembers' },
+            { lab: 'foundation', nm: 'Data · quality · context', role: 'supports' },
+            { lab: 'system', nm: 'Query · report · interaction', role: 'assists' },
+            { lab: 'people', nm: 'Judgement · decision · action', role: 'decide' },
           ],
-          conns: ['summons', 'persists'],
+          conns: ['structures', 'enables'],
         },
       },
       {
         feature: true,
-        kind: 'Lab · quant',
-        status: 'validation',
-        title: 'Agentic algorithmic trading',
-        desc: 'Brain/body architecture to trade crypto-perpetuals on a DEX: the brain decides, the gateway executes. Strategy validated with Monte Carlo (3/3) and Walk-Forward (7/9 positive years), with a production gate and paper/live modes. Quantitative rigour before any real euro.',
-        stack: ['Python 3.11', 'FastAPI', 'asyncio', 'Docker'],
+        kind: 'Personal product',
+        status: 'testing and development',
+        title: 'profes.cat',
+        desc: 'A product I am building in my own time to support vocational teachers. It is still being tested: the work is not merely making the technology run, but finding a rigorous, private and genuinely useful way to support teacher judgement.',
+        stack: ['product', 'education', 'privacy', 'applied AI'],
         diagram: {
           side: 'left',
           nodes: [
-            { lab: 'TradingAgent · brain', nm: 'Decides WHAT and WHEN', role: 'strategy' },
-            { lab: 'BrokerageService · body', nm: 'Executes · data · positions', role: 'gateway' },
-            { lab: 'lab', nm: 'Monte Carlo · Walk-Forward', role: 'evidence' },
+            { lab: 'teacher', nm: 'Experience · judgement · control', role: 'decides' },
+            { lab: 'product', nm: 'Clear flow · assistance · privacy', role: 'helps' },
+            { lab: 'testing', nm: 'Real use · errors · learning', role: 'improves' },
           ],
-          conns: ['HTTP', 'validates'],
+          conns: ['guides', 'validates'],
         },
       },
       {
-        kind: 'Fundació .cat',
-        status: 'v1.0 · 2024',
-        title: 'XMCD',
-        desc: 'Digital Catalan Monitoring Network: Raspberry Pi sensors connected over a WireGuard VPN running daily automated searches to measure the visibility of Catalan on Google. Data engineering with a cultural purpose.',
-        stack: ['Python', 'crawling', 'WireGuard', 'Zabbix'],
+        kind: 'Current work · confidential',
+        status: 'integration and internal product',
+        title: 'Business process without tool friction',
+        desc: 'I design tailored integrations, automations and interfaces over CRM and ERP systems. The goal is not another software layer, but adapting HubSpot, Odoo or Zoho to the actual process and reducing the learning curve for the people using it.',
+        stack: ['HubSpot', 'Odoo', 'Zoho', 'APIs', 'tailored frontends'],
       },
       {
-        kind: 'Open source',
-        status: 'GitHub',
-        title: 'romanroset.dev',
-        url: URL_SITE,
-        desc: 'This site, in the open. Next.js, Tailwind and TypeScript with multilingual support (CA/ES/EN). Building things others can reuse and improve.',
-        stack: ['Next.js', 'Tailwind', 'TypeScript', 'i18n'],
-      },
-      {
-        kind: 'eHealth · research',
-        kindLegacy: true,
-        status: 'published',
-        title: 'Fibroline',
-        url: URL_FIBROLINE,
-        desc: 'Self-administered cognitive-behavioural treatment app for chronic pain. I fully developed the first version. Research validated with patients and published.',
-        stack: ['Java', 'Android', 'Firebase'],
-      },
-      {
-        kind: 'eHealth · research',
-        kindLegacy: true,
-        status: '79+ citations',
-        title: 'Painometer',
-        url: URL_PAINOMETER,
-        desc: 'Mobile app to measure, store and share pain intensity. I developed the Android version. Widely cited in the scientific literature.',
-        stack: ['Java', 'Android', 'jQuery'],
+        kind: 'eHealth · product and research',
+        status: '11 publications',
+        title: 'Fibroline, Painometer and applied research',
+        url: '/publicacions',
+        desc: 'Applications for people living with chronic pain built with clinical teams, alongside eleven peer-reviewed publications. This period consolidated how I work: technology, people and evidence in the same system.',
+        stack: ['Java', 'Android', 'eHealth', 'applied research'],
       },
     ],
   },
-  certs: {
+  credentials: {
     kicker: 'Continuous learning',
-    h2: 'Recent AI training',
+    h2: 'Selected credentials',
     intro:
-      'Recent training in agentic AI (Anthropic Academy) on a certified engineering foundation. Each badge links to its verification.',
-    items: certsBase('JavaScript Certificate'),
+      'The track record demonstrates the level; these credentials show that I keep tools and foundations current. I completed nine Anthropic Academy programmes in 2026; these are the most relevant.',
     verify: 'Verify',
-    verifiable: 'Verifiable',
+    items: [
+      {
+        title: 'Spring Certified Professional',
+        issuer: 'VMware',
+        year: '2023',
+        detail: 'Java · Spring · backend',
+        verify: SPRING_CREDENTIAL,
+      },
+      {
+        title: 'AI Fluency: Framework & Foundations',
+        issuer: 'Anthropic Academy',
+        year: '2026',
+        detail: 'Score 9/10',
+        verify: 'https://verify.skilljar.com/c/baq7aydnnkx7',
+      },
+      {
+        title: 'Building with the Claude API',
+        issuer: 'Anthropic Academy',
+        year: '2026',
+        detail: 'Model and product integration',
+        verify: 'https://verify.skilljar.com/c/2hbfqux7ezhb',
+      },
+      {
+        title: 'Introduction to Model Context Protocol',
+        issuer: 'Anthropic Academy',
+        year: '2026',
+        detail: 'MCP · tools and context',
+        verify: 'https://verify.skilljar.com/c/89n6hy639snz',
+      },
+      {
+        title: 'AI Fluency for Nonprofits',
+        issuer: 'Anthropic Academy',
+        year: '2026',
+        detail: 'Applied AI for organisations',
+        verify: 'https://verify.skilljar.com/c/cywdpm62tphz',
+      },
+    ],
   },
   trajectoria: {
     kicker: 'Career',
@@ -945,17 +918,17 @@ const en: HomeContent = {
       'From supercomputing and bioinformatics to digital health and data-driven innovation. Always with the same compass: technology useful for people.',
     stats: [
       { n: '20**+**', l: 'years of craft in technology' },
-      { n: '8', l: 'organisations: research, university, spin-off and foundation' },
       { n: '11', l: 'scientific publications', href: '/publicacions' },
+      { n: '23', l: 'university final projects supervised' },
       { n: '4', l: 'years of university teaching (UOC)' },
-      { n: '6', l: 'years leading technology at Fundació .cat' },
+      { n: '6**+**', l: 'years building internal data and process systems' },
     ],
     timeline: [
       {
         yr: '2023 — present',
-        h4: 'Accent Obert · Fundació .cat',
-        role: 'Senior Engineer · technology projects and process',
-        desc: 'Building and leading projects so anyone can live fully in Catalan in the digital world: XMCD (monitoring), the Creators list and Catalan AI initiatives such as Frec.',
+        h4: 'Accent Obert',
+        role: 'Senior engineer · systems, data & applied AI',
+        desc: 'End-to-end design and implementation of internal decision systems over structured data, CRM/ERP integrations and AI solutions shaped by quality, cost and real utility.',
         now: true,
       },
       {
@@ -994,7 +967,7 @@ const en: HomeContent = {
     kicker: 'About me',
     lead: 'A simple idea drives me: technology should make people more **capable**, not more dependent.',
     p2: "I don't aim to revolutionise industries, but to add my grain of sand so people achieve the results they want —and feel more competent doing it. I believe in constant learning, active listening and collaboration.",
-    p3: 'With AI at the centre of my work, the premise does not change: the tool changes, not the purpose.',
+    p3: 'With AI, I look for the smallest structure that produces a reliable outcome: a skill, a model or a harness; agents only when the problem genuinely requires coordination.',
     langsLabel: 'Languages',
     langs: [
       { n: 'Català', lv: 'Native' },
@@ -1007,8 +980,8 @@ const en: HomeContent = {
     quoteMeta: '— Roman Roset Mayals',
   },
   footer: {
-    h2: "Let's talk about making AI genuinely useful.",
-    p: 'Available for projects, collaborations and conversations about systems engineering, data and agents.',
+    h2: "Let's talk about systems that genuinely have to work.",
+    p: 'Projects, collaborations and conversations about data, backend, product and applied AI with judgement.',
     mail: 'romanroset@proton.me',
     linksLabel: 'Links',
     links: FOOT_LINKS,
