@@ -68,18 +68,35 @@ function ProjectCard({ project }: { project: ProjectItem }) {
   if (project.feature) {
     const text = <ProjectText project={project} />
     const diagram = <Diagram project={project} />
+    const inner =
+      project.diagram?.side === 'left' ? (
+        <>
+          {diagram}
+          {text}
+        </>
+      ) : (
+        <>
+          {text}
+          {diagram}
+        </>
+      )
     return (
       <article className="proj feature">
-        {project.diagram?.side === 'left' ? (
-          <>
-            {diagram}
-            {text}
-          </>
+        {project.url?.startsWith('/') ? (
+          <Link href={project.url} style={{ display: 'contents' }}>
+            {inner}
+          </Link>
+        ) : project.url ? (
+          <a
+            href={project.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ display: 'contents' }}
+          >
+            {inner}
+          </a>
         ) : (
-          <>
-            {text}
-            {diagram}
-          </>
+          inner
         )}
       </article>
     )

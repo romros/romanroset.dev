@@ -276,6 +276,7 @@ const ca: HomeContent = {
         kind: 'Producte personal',
         status: 'en proves i desenvolupament',
         title: 'profes.cat',
+        url: 'https://profes.cat',
         desc: 'Un producte que estic construint en el meu temps lliure per ajudar professorat d’FP. Encara està en proves: el treball no és només fer que la tecnologia funcioni, sinó trobar una manera rigorosa, privada i realment útil d’acompanyar el criteri docent.',
         stack: ['producte', 'educació', 'privadesa', 'IA aplicada'],
         diagram: {
@@ -557,6 +558,7 @@ const es: HomeContent = {
         kind: 'Producto personal',
         status: 'en pruebas y desarrollo',
         title: 'profes.cat',
+        url: 'https://profes.cat',
         desc: 'Un producto que estoy construyendo en mi tiempo libre para ayudar al profesorado de FP. Todavía está en pruebas: el trabajo no consiste solo en hacer que la tecnología funcione, sino en encontrar una forma rigurosa, privada y realmente útil de acompañar el criterio docente.',
         stack: ['producto', 'educación', 'privacidad', 'IA aplicada'],
         diagram: {
@@ -838,6 +840,7 @@ const en: HomeContent = {
         kind: 'Personal product',
         status: 'testing and development',
         title: 'profes.cat',
+        url: 'https://profes.cat',
         desc: 'A product I am building in my own time to support vocational teachers. It is still being tested: the work is not merely making the technology run, but finding a rigorous, private and genuinely useful way to support teacher judgement.',
         stack: ['product', 'education', 'privacy', 'applied AI'],
         diagram: {
